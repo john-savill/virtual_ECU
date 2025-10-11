@@ -1,0 +1,40 @@
+services:
+  vecu:
+    build:
+      dockerfile: vecu/vecu.Dockerfile
+    container_name: soafee_vecu
+    ports:
+      - "8081:8081"
+    networks:
+      - soafee-network
+    restart: unless-stopped
+    healthcheck:
+      #test: ["CMD", "netstat", "-an", "|", "grep", "8081"]
+      test: ["CMD", "curl", "-f", "http://localhost:8081"]
+      interval: 20s
+      timeout: 5s
+      retries: 2
+      start_period: 5s
+
+  hmi:
+    build:
+      dockerfile: hmi/hmi.Dockerfile
+    container_name: hmi
+    ports:
+      - "80:80"
+    networks:
+      - soafee-network
+    depends_on:
+      - vecu
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:81"]
+      interval: 20s
+      timeout: 5s
+      retries: 2
+      start_period: 5s
+
+networks:
+  soafee-network:
+    driver: bridge
+    name: soafee-network
