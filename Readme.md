@@ -2,6 +2,8 @@
 
 This is a Basic Virtual ECU (VECU) that is made to run in a docker container. It is [Soafee](https://www.soafee.io/) compliant. Alongside the VECU is a Human-Machine Interface (HMI), which is built and runs in a seperate docker container, on a local webpage.
 
+I've mostly grabbed bits from the internet to put together the HMI HTTP viewer, adding some stuff of my own. I'm hoping this project will encourage me to learn more HTTP...
+
 ## Features
 
 ### VECU
@@ -14,11 +16,11 @@ This is a Basic Virtual ECU (VECU) that is made to run in a docker container. It
 ### HMI
 - Separate frontend - container for UI
 - Standard HTTP methods
-- Uodates quickly - polling for data
+- Updates quickly - polling for data
 
 ### Base ECU Functions
 
-Power, brake control, ADAS on/off, diagnosistics, some sensor data (battery, temperature)
+Power, brake control, ADAS on/off, diagnosistics, some sensor data (battery, temperature).
 
 ## Network Architecture
 
