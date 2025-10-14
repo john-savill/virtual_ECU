@@ -87,8 +87,7 @@ run:
 ```
 ## Development plan and known issues
 
-- Containers starting unhealthy
 - no yaml 
 - hmi on all localhost ports
 - only base functionality
-- larger docker containers
+- want smalles possible docker containers

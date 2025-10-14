@@ -9,9 +9,8 @@ services:
       - soafee-network
     restart: unless-stopped
     healthcheck:
-      #test: ["CMD", "netstat", "-an", "|", "grep", "8081"]
-      test: ["CMD", "curl", "-f", "http://localhost:8081"]
-      interval: 20s
+      test: ["CMD", "netstat", "-an", "|", "grep", "8081"]
+      interval: 5s
       timeout: 5s
       retries: 2
       start_period: 5s
@@ -28,8 +27,8 @@ services:
       - vecu
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:81"]
-      interval: 20s
+      test: ["CMD", "wget", "--quiet", "--tries=3", "--spider", "http://localhost/health"]
+      interval: 5s
       timeout: 5s
       retries: 2
       start_period: 5s

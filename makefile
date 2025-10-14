@@ -24,9 +24,9 @@ $(MAIN_TARGET): $(MAIN_SRC)
 $(SIM_TARGET): $(SIM_SRC)
 	$(CC) $(CFLAGS) -o $(SIM_TARGET) $(SIM_SRC)
 
-# Docker container (same name as application)
+# Docker containers, not really required as done from docker compose
 docker-build:
-	docker build -t $(MAIN_TARGET) .
+	docker compose build
 
 # Install dependencies (Ubuntu/Debian)
 deps:

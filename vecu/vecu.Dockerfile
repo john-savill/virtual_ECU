@@ -10,6 +10,7 @@ LABEL maintainer="John"
 RUN apt-get update && apt-get install -y \
     gcc \
     make \
+    net-tools \
     && rm -rf /var/lib/apt/lists/*
 
 # Create working directory
