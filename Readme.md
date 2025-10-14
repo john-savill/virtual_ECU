@@ -62,7 +62,7 @@ http://localhost
 
 ### Stop the system
 ```
-docker compose down
+docker compose down -v
 ```
 
 ---
