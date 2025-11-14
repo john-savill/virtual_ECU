@@ -1,0 +1,39 @@
+build_on_x86_host:
+  image:  docker:latest
+  stage: build
+  tags:
+    - test_x86
+  rules:
+    - if: $CI_COMMIT_TAG
+      variables:
+        DOCKER_TAG: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH
+      variables:
+        DOCKER_TAG: $CI_COMMIT_BRANCH-latest
+  script:
+    - cp scripts/Dockerfile ./
+    - docker context create test_pc --docker "host=tcp://192.168.48.10:2375"
+    - docker --context test_pc build -t cavway.idiada.com:5000/esmini_pc:$DOCKER_TAG .
+    - docker --context test_pc push cavway.idiada.com:5000/esmini_pc:$DOCKER_TAG
+
+
+
+
+build_on_idapt:
+  image: docker:latest
+  stage: test
+  tags: 
+    - test
+  rules:
+    - if: $CI_COMMIT_TAG
+      variables:
+        DOCKER_TAG: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH
+      variables:
+        DOCKER_TAG: $CI_COMMIT_BRANCH-latest
+  script:
+    - docker --version
+# CURRENTLY BUILDING DIRECTLY ON THE IDAPT USING ITS DOCKERD
+    - docker context create test_idapt --docker "host=tcp://192.168.50.25:2375"
+    - docker --context test_idapt build -t cavway.idiada.com:5000/esmini:$DOCKER_TAG .
+    - docker --context test_idapt push cavway.idiada.com:5000/esmini:$DOCKER_TAG
